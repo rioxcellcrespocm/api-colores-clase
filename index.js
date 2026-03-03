@@ -24,7 +24,7 @@ servidor.get("/colores", async (peticion,respuesta) => {
         respuesta.json(colores);//“Luego, responde al navegador con esa lista de colores en formato JSON.”
 
     } catch(e){
-   console.log(e); // 👈 esto es clave
+   console.log("ERROR REAL:", e);
    respuesta.status(500);
    respuesta.json({ error: e.message });
 }
