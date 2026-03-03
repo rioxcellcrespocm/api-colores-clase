@@ -23,11 +23,11 @@ servidor.get("/colores", async (peticion,respuesta) => {
 
         respuesta.json(colores);//“Luego, responde al navegador con esa lista de colores en formato JSON.”
 
-    } catch(e) {//“Si algo sale mal, haz esto otro:”
-        respuesta.status(500);//“Dile al navegador que hubo un error en el servidor (código 500).”      
-
-        respuesta.json({ error: "error en la base de datos" });//“Y responde con un mensaje de error en formato JSON.”  
-    }   
+    } catch(e){
+   console.log(e); // 👈 esto es clave
+   respuesta.status(500);
+   respuesta.json({ error: e.message });
+}
 });
 //segunda ruta:“Cuando alguien envíe datos a /nuevo, el servidor va a ejecutar este código.”
 servidor.post("/nuevo", async (peticion,respuesta) => {//“quiero añadir un color nuevo
@@ -86,7 +86,7 @@ servidor.patch("/actualizar/:id", async (peticion, respuesta,siguiente) => {
 
         siguiente();//404
                                                               //existe	 cambio 	Resultado
- 	                                                         //   1	        1          204 (se actualizó)
+                                                             //   1	        1          204 (se actualizó)
                                                             //    1	       0    "no se actualizó el recurso"
                                                             //   0         0          404
     
